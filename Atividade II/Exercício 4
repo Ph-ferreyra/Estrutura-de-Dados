@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 10
+
+typedef struct {
+    char nome[50];
+    int idade;
+} Pessoa;
+
+Pessoa prioridade[MAX], normal[MAX];
+int p = 0, n = 0;
+
+int main() {
+    Pessoa pessoa;
+
+    // entrada fixa com novos exemplos
+    strcpy(pessoa.nome, "Carlos Silva"); pessoa.idade = 45;
+    if (pessoa.idade > 65) prioridade[p++] = pessoa;
+    else normal[n++] = pessoa;
+
+    strcpy(pessoa.nome, "Dona Maria"); pessoa.idade = 72;
+    if (pessoa.idade > 65) prioridade[p++] = pessoa;
+    else normal[n++] = pessoa;
+
+    strcpy(pessoa.nome, "Ana Souza"); pessoa.idade = 28;
+    if (pessoa.idade > 65) prioridade[p++] = pessoa;
+    else normal[n++] = pessoa;
+
+    strcpy(pessoa.nome, "Seu Sebastiao"); pessoa.idade = 79;
+    if (pessoa.idade > 65) prioridade[p++] = pessoa;
+    else normal[n++] = pessoa;
+
+    strcpy(pessoa.nome, "Lucas Lima"); pessoa.idade = 19;
+    if (pessoa.idade > 65) prioridade[p++] = pessoa;
+    else normal[n++] = pessoa;
+
+    // atendimento (estrutura idêntica)
+    printf("Atendimento:\n");
+
+    for (int i = 0; i < p; i++)
+        printf("Prioritario: %s\n", prioridade[i].nome);
+
+    for (int i = 0; i < n; i++)
+        printf("Normal: %s\n", normal[i].nome);
+
+    return 0;
+}
