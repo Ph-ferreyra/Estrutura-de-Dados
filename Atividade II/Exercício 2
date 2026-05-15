@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 10
+
+typedef struct {
+    char aparelho[50];
+    int consumo_kwh;
+} Dispositivo;
+
+Dispositivo fila[MAX];
+int front = 0, rear = 0;
+
+void enqueue(Dispositivo d) {
+    fila[rear++] = d;
+}
+
+Dispositivo dequeue() {
+    return fila[front++];
+}
+
+int main() {
+    Dispositivo d;
+    int soma_consumo = 0, total_aparelhos = 0;
+
+    // Inserindo dados de consumo de 5 eletrônicos
+    d.consumo_kwh = 14; enqueue(d);
+    d.consumo_kwh = 3;  enqueue(d);
+    d.consumo_kwh = 9;  enqueue(d);
+    d.consumo_kwh = 11; enqueue(d);
+    d.consumo_kwh = 5;  enqueue(d);
+
+    while (front < rear) {
+        Dispositivo aux = dequeue();
+        soma_consumo += aux.consumo_kwh;
+        total_aparelhos++;
+    }
+
+    float media_kwh = (float) soma_consumo / total_aparelhos;
+
+    printf("Consumo Medio: %.2f kWh\n", media_kwh);
+
+    // Mantendo a verificação lógica exata com limite 8
+    if (media_kwh > 8)
+        printf("Alerta: Reduzir uso de energia imediatamente!\n");
+    else
+        printf("Consumo dentro da meta esperada.\n");
+
+    return 0;
+}
