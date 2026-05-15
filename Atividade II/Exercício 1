@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 10
+
+typedef struct {
+    char passageiro[50];
+    char passaporte[15];
+    char destino[15];
+    char tipo_mala[10]; // "Nacional" ou "Internac"
+} Bagagem;
+
+Bagagem fila[MAX];
+int front = 0, rear = 0;
+
+void enqueue(Bagagem b) {
+    fila[rear++] = b;
+}
+
+Bagagem dequeue() {
+    return fila[front++];
+}
+
+int main() {
+    Bagagem b;
+
+    // Inserindo 5 malas na esteira
+    strcpy(b.passageiro, "Andre");    strcpy(b.tipo_mala, "Nacional"); enqueue(b);
+    strcpy(b.passageiro, "Bianca");   strcpy(b.tipo_mala, "Internac"); enqueue(b);
+    strcpy(b.passageiro, "Claudio");  strcpy(b.tipo_mala, "Nacional"); enqueue(b);
+    strcpy(b.passageiro, "Daniela");  strcpy(b.tipo_mala, "Internac"); enqueue(b);
+    strcpy(b.passageiro, "Eduardo");  strcpy(b.tipo_mala, "Nacional"); enqueue(b);
+
+    int nacional = 0, internac = 0;
+
+    while (front < rear) {
+        Bagagem aux = dequeue();
+        if (strcmp(aux.tipo_mala, "Nacional") == 0)
+            nacional++;
+        else
+            internac++;
+    }
+
+    printf("Voos Nacionais: %d | Voos Internacionais: %d\n", nacional, internac);
+
+    return 0;
+}
