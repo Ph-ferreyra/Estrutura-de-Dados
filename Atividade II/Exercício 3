@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 5
+
+typedef struct {
+    int codigo;
+    char arquivo[50];
+    int bytes;
+} Doc;
+
+Doc fila[MAX];
+int front = 0, rear = 0;
+
+void enqueue(Doc d) {
+    fila[rear++] = d;
+}
+
+Doc dequeue() {
+    return fila[front++];
+}
+
+int main() {
+    Doc d;
+
+    // Vetor auxiliar apenas para mudar os exemplos de nomes de arquivos e tamanhos
+    char *nomes_exemplos[] = {
+        "relatorio_financeiro.pdf",
+        "nota_fiscal_042.xml",
+        "contrato_prestacao.docx",
+        "planilha_orcamento.xlsx",
+        "foto_comprovante.png"
+    };
+    int tamanhos_exemplos[] = {4500, 1200, 8500, 15000, 3200};
+
+    // Preenchendo a fila com os novos exemplos
+    for (int i = 0; i < 5; i++) {
+        d.codigo = 100 + (i + 1); // Códigos de exemplo: 101, 102, 103...
+        strcpy(d.arquivo, nomes_exemplos[i]);
+        d.bytes = tamanhos_exemplos[i];
+        enqueue(d);
+    }
+
+    // Exibindo os dados da fila (permanece idêntico)
+    while (front < rear) {
+        Doc aux = dequeue();
+        printf("Codigo: %d | Nome: %s | Bytes: %d\n",
+               aux.codigo, aux.arquivo, aux.bytes);
+    }
+
+    return 0;
+}
